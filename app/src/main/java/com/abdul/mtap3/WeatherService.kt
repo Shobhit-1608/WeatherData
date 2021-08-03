@@ -1,5 +1,6 @@
 package com.abdul.mtap3
 
+import android.widget.EditText
 import com.abdul.mtap3.model.WeatherResponse
 import retrofit2.Call
 import retrofit2.http.GET

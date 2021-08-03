@@ -6,6 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity2">
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:id="@+id/longitude"
+        android:hint="enter longitude"
+        tools:ignore="MissingConstraints" />
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:id="@+id/latitude"
+        app:layout_constraintTop_toBottomOf="@+id/longitude"
+        android:hint="enter latitude"
+        tools:ignore="MissingConstraints" />
+
+
+
     <Button
         android:id="@+id/btn_weather"
         android:layout_width="wrap_content"
@@ -15,7 +37,8 @@
         android:layout_marginTop="74dp"
         android:text="getWeather"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/latitude"
+        />
 
     <TextView
         android:id="@+id/tv_weather"

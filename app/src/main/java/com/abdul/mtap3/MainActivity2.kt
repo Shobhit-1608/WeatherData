@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import com.abdul.mtap3.model.WeatherResponse
 import retrofit2.Call
@@ -15,11 +16,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity2 : AppCompatActivity() {
     lateinit var  weatherData: TextView
     lateinit var button: Button
+    private lateinit var etLatitude: EditText
+    lateinit var etLongitude: EditText
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
         weatherData = findViewById(R.id.tv_weather)
         button = findViewById(R.id.btn_weather)
+        etLatitude = findViewById(R.id.latitude)
+        etLongitude = findViewById(R.id.longitude)
         button.setOnClickListener(View.OnClickListener { getCurrentData() })
        // getWeather()
     }
@@ -29,9 +37,10 @@ class MainActivity2 : AppCompatActivity() {
             .baseUrl(BaseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
+        var latitude = etLatitude.text.toString()
+        var longitude = etLongitude.text.toString()
         val service = retrofit.create(WeatherService::class.java)
-        val call = service.getCurrentWeatherData(lat, lon, AppId)
+        val call = service.getCurrentWeatherData(latitude, longitude, AppId)
         call.enqueue(object : Callback<WeatherResponse> {
             override fun onResponse(
                 call: Call<WeatherResponse>,
@@ -47,12 +56,16 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     internal fun getCurrentData() {
+
+
+        var latitude = etLatitude.text.toString()
+        var longitude = etLongitude.text.toString()
         val retrofit = Retrofit.Builder()
             .baseUrl(BaseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(WeatherService::class.java)
-        val call = service.getCurrentWeatherData(lat, lon, AppId)
+        val call = service.getCurrentWeatherData(latitude, longitude, AppId)
         call.enqueue(object : Callback<WeatherResponse> {
             override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>) {
                 if (response.code() == 200) {
@@ -87,10 +100,10 @@ class MainActivity2 : AppCompatActivity() {
     }
     companion object {
 
+
         var BaseUrl = "http://api.openweathermap.org/"
         var AppId = "2e65127e909e178d0af311a81f39948c"
-        var lat = "35"
-        var lon = "139"
+
     }
 
 
